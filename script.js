@@ -1,24 +1,70 @@
-$(document).ready(function() {
-    $('#random').click(get_quote);
-    $("#tweet").click(function(){
-      var quote = $("#quote").text();
-      var tweetq = quote.substr(0,quote.length > 137 ? 137 : quote.length) + (quote.length > 137 ? "..." : "");
-      $(this).attr("href", "https://twitter.com/intent/tweet/?text=" + tweetq);
-    });
-  });
+const BACKGROUND_COLORS = ['#16a085', '#27ae60', '#2c3e50', '#f39c12', '#e74c3c', '#9b59b6', '#FB6964', '#342224', '#472E32', '#BDBB99', '#77B1A9', '#73A857'];
 
-function get_quote()
-{
-  $("#random").addClass("active");
-  $("#box").animate({opacity: 0}, 1000);
-  setTimeout(function(){$("#random").removeClass("active")}, 300);  
-  $.getJSON("https://api.quotable.io/random", function(post){
-    $("#quote").html(post.content);
-    $("#speaker").html("-" + post.author.split(" (")[0]);
-  });
-  document.getElementById("box").style.opacity = "0";
-  setTimeout(function(){$("#box").animate({opacity: 1}, 1000)}, 1000);
-  var colors = ['#16a085', '#27ae60', '#2c3e50', '#f39c12', '#e74c3c', '#9b59b6', '#FB6964', '#342224', "#472E32", "#BDBB99", "#77B1A9", "#73A857"];
-  document.body.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-  $("body").animate({backgroundColor: colors[Math.floor(Math.random() * colors.length)]}, 1000);
-}
+/**
+ * Element references
+ */
+
+const generateQuoteButton = document.getElementById('random');
+const tweetButton = document.getElementById('tweet');
+const quoteBody = document.getElementById('quote');
+const authorBody = document.getElementById('speaker');
+const quoteBox = document.getElementById('box');
+
+/**
+ * @description
+ * Updates the tweet button href with the new quote body.
+ * Called once a new quote is fetched.
+ * NOTE: Did this instead of adding an event listener to the tweet button.
+ * 
+ * @param {string} quote quote text 
+ */
+
+const updateTweetText = (quote) => {
+  let quoteText = quote;
+  if(quoteText.length > 140)
+    quoteText = substr(0, 137) + '...';
+  tweetButton.setAttribute('href', `https://twitter.com/intent/tweet/?text=${quoteText}`);
+};
+
+/**
+ * @description
+ * Chooses one colour from the array at random.
+ * Updates the body background with the chosen color.
+ * Called when a new quote is fetched.
+ */
+const updateBackground = () => {
+  const luckyColor = Math.floor(Math.random() * BACKGROUND_COLORS.length);
+  document.body.style.backgroundColor = BACKGROUND_COLORS[luckyColor];
+};
+
+/**
+ * @summary
+ * Updates the quote and author.
+ * Called when a new quote is fetched.
+ * 
+ * @param {string} quoteText 
+ * @param {string} auhtorText 
+ */
+const updateQuoteText = (quoteText, auhtorText) => {
+  quoteBody.innerText = quoteText;
+  authorBody.innerText = auhtorText;
+};
+
+/**
+ * @summary
+ * Fetches a new quote and calls other functions.
+ * Uses https://github.com/lukePeavey/quotable
+ */
+const updateQuote = () => {
+  generateQuoteButton.classList.add('active');
+  fetch('https://api.quotable.io/random')
+    .then(res => res.json())
+    .then(data => {
+      generateQuoteButton.classList.remove('active');
+      updateQuoteText(data.content, data.author);
+      updateBackground();
+    })
+    .catch(err => console.error(err));
+};
+
+generateQuoteButton.addEventListener('click', updateQuote);
