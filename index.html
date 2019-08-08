@@ -1,43 +1,49 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
 
-<head>
-  <title> Quotes </title>
-  <link href="https://fonts.googleapis.com/css?family=Lato|Source+Sans+Pro:200" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet">
-  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href = "main.css" rel = "stylesheet">
+  <head>
+    <title> Quotes </title>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" rel="stylesheet"/>
+    <link href = "main.css" rel = "stylesheet">
+  </head>
 
-  <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
-
-  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
-</head>
-
-<body>
-
-  <h1> The Random Quote Generator </h1>
-
-  <div id = "box">
-    <i class = "fa fa-quote-left"> </i>
-    <div id = "quote">
-      <p> Sharing is good, and with digital technology, sharing is easy. </p>
-    </div>
-    <div id = "speaker">
-      <p> -Richard Stallman </p>
-    </div>
-  </div>
-
-  <div id = "but_row">
-    <a id = "tweet" href = "#"> <i class = "fa fa-twitter"> </i> </a>
-    <div id = "random"> <a id = "try"> Generate </a> </div>
-    <a href = "https://github.com/arvind0598"> <i class = "fa fa-github"> </i> </a>
-  </div>
-
-  <footer>
-    <p> Designed with love, by Arvind S </p>
-  </footer>
-
-  <script src="script.js"> </script>  
-</body>
-
+  <body>
+    <section class="section">
+      <div class="container">
+        <div class="columns is-centered is-vcentered">
+          <div class="column is-two-fifths-desktop is-half-tablet">
+            <div class="card">
+              <div class="card-content">
+                <p id="quote" class="title">
+                  “There are two hard things in computer science: cache invalidation, naming things, and off-by-one errors.”
+                </p>
+                <p id="author" class="subtitle">
+                  Jeff Atwood
+                </p>
+              </div>
+              <footer class="card-footer">
+                <p class="card-footer-item">
+                  <span>
+                    <a id="tweet-button" href="#" target="_blank">Share</a>
+                  </span>
+                </p>
+                <p class="card-footer-item">
+                  <span>
+                    <a id="generate-random-quote-button" href="#">Generate</a>
+                  </span>
+                </p>
+                <p class="card-footer-item">
+                  <span>
+                    <a href="https://github.com/arvind0598">Github</a>
+                  </span>
+                </p>
+              </footer>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script src="script.js"> </script>  
+  </body>
 </html>

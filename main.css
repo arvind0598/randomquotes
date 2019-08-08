@@ -1,137 +1,15 @@
-body
-{
-  background-color: #16a085;
+body {
+  height: 100vh;
+  transition: 300ms ease all;
+}
+
+section {
+  height: 100%;
+}
+
+.container {
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  transition: all 300ms ease;
-}
-
-h1
-{
-  font-family: 'Cabin Sketch', cursive;
-  color: rgba(255,255,255,0.8);
-  font-size: 6vh;
-  margin: 5vh auto;
-  text-align: center;
-}
-
-i
-{
-  color: rgba(0,0,0,0.5);
-  font-size: 4vh;
-  margin: 0;
-}
-
-#box
-{
-  margin-top: 6vh;
-  border-radius: 2vh;
-  background-color: rgba(255,255,255,0.5);
-  padding: 2vh;
-}
-
-#quote
-{
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 5vh;
-  width: 60vw;
-  text-align: center;
-  margin: 2vh;
-  color: rgba(0,0,0,0.8);
-}
-
-#speaker
-{
-  margin-top: 2vh;
-  font-family: 'Lato', sans-serif;
-  font-size: 3vh;
-  text-align: center;
-}
-
-#but_row
-{
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  position: fixed;
-  bottom: 15vh;
-}
-
-#but_row > a > i
-{
-  margin: 4vw;
-  color: rgba(0,0,0,0.8);
-}
-
-#random
-{
-  margin: 0;
-  width: 20vh;
-  height: calc(8vh - 2px);
-  background-color: white;
-  border: 1px black solid;
-  border-radius: 4vh;
-  line-height: calc(8vh - 2px);
-  text-align: center;
-  float: right;
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 300ms;
-}
-
-.active
-{
-  transform: scale(1.05) translateY(-1vh);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-}
-
-footer
-{
-  font-size: 2.5vh;
-  font-family: 'Source Sans Pro', sans-serif;
-  text-align: center;
-  position: fixed;
-  bottom: 0;
-  margin: 0;
-  user-select: none;
-  color: rgba(255,255,255,0.9);
-}
-
-a
-{
-  text-decoration: none;
-  font-family: 'Source Sans Pro', sans-serif;
-  font-size: 3vh;
-  letter-spacing: 0.1vh;
-  color: inherit;
-}
-
-/*
-RESPONSIVENESS
-*/
-
-@media only screen and (max-width: 500px)
-{
-  h1
-  {
-    margin-top: 4vh;
-    margin-bottom: 2vh;
-  }
-
-  body
-  {
-    overflow: hidden;
-  }
-
-  #box
-  {
-    margin-top: 3vh;
-  }
-
-  #quote
-  {
-    font-size: 3.5vh;
-  }
 }

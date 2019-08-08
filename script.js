@@ -4,11 +4,10 @@ const BACKGROUND_COLORS = ['#16a085', '#27ae60', '#2c3e50', '#f39c12', '#e74c3c'
  * Element references
  */
 
-const generateQuoteButton = document.getElementById('random');
-const tweetButton = document.getElementById('tweet');
+const generateQuoteButton = document.getElementById('generate-random-quote-button');
+const tweetButton = document.getElementById('tweet-button');
 const quoteBody = document.getElementById('quote');
-const authorBody = document.getElementById('speaker');
-const quoteBox = document.getElementById('box');
+const authorBody = document.getElementById('author');
 
 /**
  * @description
@@ -22,8 +21,9 @@ const quoteBox = document.getElementById('box');
 const updateTweetText = (quote) => {
   let quoteText = quote;
   if(quoteText.length > 140)
-    quoteText = substr(0, 137) + '...';
-  tweetButton.setAttribute('href', `https://twitter.com/intent/tweet/?text=${quoteText}`);
+    quoteText = quote.substring(0, 137) + '...';
+  let encodedQuoteText = encodeURI(quoteText);
+  tweetButton.setAttribute('href', `https://twitter.com/intent/tweet/?text=${encodedQuoteText}`);
 };
 
 /**
@@ -46,7 +46,7 @@ const updateBackground = () => {
  * @param {string} auhtorText 
  */
 const updateQuoteText = (quoteText, auhtorText) => {
-  quoteBody.innerText = quoteText;
+  quoteBody.innerText = `"${quoteText}"`;
   authorBody.innerText = auhtorText;
 };
 
@@ -55,7 +55,8 @@ const updateQuoteText = (quoteText, auhtorText) => {
  * Fetches a new quote and calls other functions.
  * Uses https://github.com/lukePeavey/quotable
  */
-const updateQuote = () => {
+const updateQuote = (e) => {
+  e.preventDefault();
   generateQuoteButton.classList.add('active');
   fetch('https://api.quotable.io/random')
     .then(res => res.json())
@@ -63,6 +64,7 @@ const updateQuote = () => {
       generateQuoteButton.classList.remove('active');
       updateQuoteText(data.content, data.author);
       updateBackground();
+      updateTweetText(data.content);
     })
     .catch(err => console.error(err));
 };
