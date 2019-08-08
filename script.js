@@ -55,8 +55,7 @@ const updateQuoteText = (quoteText, auhtorText) => {
  * Fetches a new quote and calls other functions.
  * Uses https://github.com/lukePeavey/quotable
  */
-const updateQuote = (e) => {
-  e.preventDefault();
+const updateQuote = () => {
   generateQuoteButton.classList.add('active');
   fetch('https://api.quotable.io/random')
     .then(res => res.json())
@@ -70,3 +69,5 @@ const updateQuote = (e) => {
 };
 
 generateQuoteButton.addEventListener('click', updateQuote);
+
+window.onload = updateQuote();
