@@ -12,8 +12,8 @@ function get_quote()
   $("#random").addClass("active");
   $("#box").animate({opacity: 0}, 1000);
   setTimeout(function(){$("#random").removeClass("active")}, 300);  
-  $.getJSON("https://random-quote-generator.herokuapp.com/api/quotes/random", function(post){
-    $("#quote").html(post.quote);
+  $.getJSON("https://api.quotable.io/random", function(post){
+    $("#quote").html(post.content);
     $("#speaker").html("-" + post.author.split(" (")[0]);
   });
   document.getElementById("box").style.opacity = "0";
