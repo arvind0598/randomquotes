@@ -1,4 +1,4 @@
-import './main.css'; //for webpack
+import './main.css'; // for webpack
 
 const BACKGROUND_COLORS = ['#16a085', '#27ae60', '#2c3e50', '#f39c12', '#e74c3c', '#9b59b6', '#FB6964', '#342224', '#472E32', '#BDBB99', '#77B1A9', '#73A857'];
 
@@ -16,15 +16,14 @@ const authorBody = document.getElementById('author');
  * Updates the tweet button href with the new quote body.
  * Called once a new quote is fetched.
  * NOTE: Did this instead of adding an event listener to the tweet button.
- * 
- * @param {string} quote quote text 
+ *
+ * @param {string} quote quote text
  */
 
 const updateTweetText = (quote) => {
   let quoteText = quote;
-  if(quoteText.length > 140)
-    quoteText = quote.substring(0, 137) + '...';
-  let encodedQuoteText = encodeURI(quoteText);
+  if (quoteText.length > 140) quoteText = `${quote.substring(0, 137)}...`;
+  const encodedQuoteText = encodeURI(quoteText);
   tweetButton.setAttribute('href', `https://twitter.com/intent/tweet/?text=${encodedQuoteText}`);
 };
 
@@ -43,9 +42,9 @@ const updateBackground = () => {
  * @summary
  * Updates the quote and author.
  * Called when a new quote is fetched.
- * 
- * @param {string} quoteText 
- * @param {string} authorText 
+ *
+ * @param {string} quoteText
+ * @param {string} authorText
  */
 const updateQuoteText = (quoteText, authorText) => {
   quoteBody.innerText = `"${quoteText}"`;
@@ -61,7 +60,7 @@ const updateQuote = () => {
   generateQuoteButton.classList.add('active');
   fetch('https://api.quotable.io/random')
     .then(res => res.json())
-    .then(data => {
+    .then((data) => {
       generateQuoteButton.classList.remove('active');
       updateQuoteText(data.content, data.author);
       updateBackground();

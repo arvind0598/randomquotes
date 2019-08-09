@@ -9,48 +9,48 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
  */
 
 const babelRule = {
-    test: /\.(js|jsx)$/,
-    exclude: /node_modules/,
-    use: {
-        loader: 'babel-loader',
-    },
+  test: /\.(js|jsx)$/,
+  exclude: /node_modules/,
+  use: {
+    loader: 'babel-loader',
+  },
 };
 
 const htmlRule = {
-    test: /\.html$/,
-    use: {
-        loader: 'html-loader',
-    },
+  test: /\.html$/,
+  use: {
+    loader: 'html-loader',
+  },
 };
 
 const cssRule = {
-    test: /\.css$/,
-    use: [
-        MiniCSSExtractPlugin.loader,
-        'css-loader',
-    ],
-  };
+  test: /\.css$/,
+  use: [
+    MiniCSSExtractPlugin.loader,
+    'css-loader',
+  ],
+};
 
 /**
  * Plugins Configuration
  */
 
 const HTMLWebpackPluginConfig = {
-    template: path.resolve(__dirname, '../src/index.html'),
-    filename: 'index.html',
-    minify: {
-        html5: true,
-        collapseWhitespace: true,
-        caseSensitive: true,
-        removeComments: true,
-        removeEmptyElements: false,
-    },
+  template: path.resolve(__dirname, '../src/index.html'),
+  filename: 'index.html',
+  minify: {
+    html5: true,
+    collapseWhitespace: true,
+    caseSensitive: true,
+    removeComments: true,
+    removeEmptyElements: false,
+  },
 };
 
 const MiniCSSExtractPluginConfig = {
-    filename: '[name]-styles.css',
-    // chunkFilename: '[id].css',
-    ignoreOrder: false,
+  filename: '[name]-styles.css',
+  // chunkFilename: '[id].css',
+  ignoreOrder: false,
 
 };
 
@@ -59,46 +59,46 @@ const MiniCSSExtractPluginConfig = {
  */
 
 const outputFormatConfig = {
-    output: {
-      filename: '[name].bundle.js',
-      path: path.resolve(__dirname, '../dist'),
-    },
-  };
-  
+  output: {
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, '../dist'),
+  },
+};
+
 const optimizationConfig = {
-    optimization: {
-        minimizer: [
-            new TerserWebpackPlugin({}),
-            new OptimizeCSSAssetsPlugin({}),
-        ],
-        splitChunks: {
-            cacheGroups: {
-                styles: {
-                    name: 'main',
-                    test: /\.css$/,
-                    chunks: 'all',
-                    enforce: true,
-                },
-            },
+  optimization: {
+    minimizer: [
+      new TerserWebpackPlugin({}),
+      new OptimizeCSSAssetsPlugin({}),
+    ],
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: 'main',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true,
         },
+      },
     },
+  },
 };
 
 const webpackConfig = {
-    entry: path.resolve(__dirname, '../src/script.js'),
-    ...outputFormatConfig,
-    ...optimizationConfig,
-    module: {
-        rules: [
-            babelRule,
-            htmlRule,
-            cssRule,
-        ],
-    },
-    plugins: [
-        new HTMLWebpackPlugin(HTMLWebpackPluginConfig),
-        new MiniCSSExtractPlugin(MiniCSSExtractPluginConfig),
+  entry: path.resolve(__dirname, '../src/script.js'),
+  ...outputFormatConfig,
+  ...optimizationConfig,
+  module: {
+    rules: [
+      babelRule,
+      htmlRule,
+      cssRule,
     ],
+  },
+  plugins: [
+    new HTMLWebpackPlugin(HTMLWebpackPluginConfig),
+    new MiniCSSExtractPlugin(MiniCSSExtractPluginConfig),
+  ],
 };
 
 module.exports = webpackConfig;
