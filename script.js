@@ -43,11 +43,11 @@ const updateBackground = () => {
  * Called when a new quote is fetched.
  * 
  * @param {string} quoteText 
- * @param {string} auhtorText 
+ * @param {string} authorText 
  */
-const updateQuoteText = (quoteText, auhtorText) => {
+const updateQuoteText = (quoteText, authorText) => {
   quoteBody.innerText = `"${quoteText}"`;
-  authorBody.innerText = auhtorText;
+  authorBody.innerText = authorText;
 };
 
 /**
