@@ -57,11 +57,9 @@ const updateQuoteText = (quoteText, authorText) => {
  * Uses https://github.com/lukePeavey/quotable
  */
 const updateQuote = () => {
-  generateQuoteButton.classList.add('active');
   fetch('https://api.quotable.io/random')
     .then(res => res.json())
     .then((data) => {
-      generateQuoteButton.classList.remove('active');
       updateQuoteText(data.content, data.author);
       updateBackground();
       updateTweetText(data.content);
