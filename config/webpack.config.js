@@ -4,6 +4,8 @@ const MiniCSSExtractPlugin = require('mini-css-extract-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
+const isDev = process.env.NODE_ENV !== 'production';
+
 /**
  * Rules
  */
@@ -38,7 +40,8 @@ const cssRule = {
 const HTMLWebpackPluginConfig = {
   template: path.resolve(__dirname, '../src/index.html'),
   filename: 'index.html',
-  minify: {
+  inject: true,
+  minify: isDev && {
     html5: true,
     collapseWhitespace: true,
     caseSensitive: true,
@@ -84,10 +87,21 @@ const optimizationConfig = {
   },
 };
 
+const devServerConfig = {
+  devtool: isDev && 'source-map',
+  devServer: {
+    host: '0.0.0.0',
+    port: '3000',
+    open: true,
+    watchContentBase: true,
+  },
+};
+
 const webpackConfig = {
   entry: path.resolve(__dirname, '../src/script.js'),
   ...outputFormatConfig,
   ...optimizationConfig,
+  ...devServerConfig,
   module: {
     rules: [
       babelRule,
