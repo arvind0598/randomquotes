@@ -64,7 +64,12 @@ const updateQuote = () => {
       updateBackground();
       updateTweetText(data.content);
     })
-    .catch(err => console.error(err));
+    .catch((err) => {
+      // eslint-disable-next-line no-console
+      console.error(err);
+      updateQuoteText('There seems to be an issue. Check the console for more details.', '');
+      updateTweetText('Checkout arvindsuresh.in');
+    });
 };
 
 generateQuoteButton.addEventListener('click', updateQuote);
